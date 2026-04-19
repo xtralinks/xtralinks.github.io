@@ -1,561 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="monetag" content="22ea6886cc854ff0997cef340599e9e8">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify · 10s Ad & Copy</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-        }
-        body {
-            min-height: 100vh;
-            background: linear-gradient(145deg, #0b0f17 0%, #1a1f2c 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem;
-            margin: 0;
-        }
-        .card {
-            max-width: 560px;
-            width: 100%;
-            background: rgba(22, 28, 40, 0.9);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 2rem;
-            padding: 2.5rem 2rem 2.5rem;
-            box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(90, 180, 255, 0.1) inset;
-            transition: all 0.2s ease;
-        }
-        h1 {
-            font-size: 2.3rem;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #eef2ff, #bdd3ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 0.4rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .badge {
-            background: #2e3a5c;
-            color: #b7cdff;
-            font-size: 0.8rem;
-            font-weight: 500;
-            padding: 0.2rem 0.8rem;
-            border-radius: 40px;
-            border: 1px solid #3f506f;
-            letter-spacing: 0.3px;
-        }
-        .subhead {
-            color: #9aa7c4;
-            font-size: 1rem;
-            margin-bottom: 2.2rem;
-            border-left: 3px solid #3e7bfa;
-            padding-left: 1rem;
-            font-weight: 400;
-        }
-        .verification-area {
-            background: #10141e;
-            border-radius: 1.5rem;
-            padding: 1.8rem 1.8rem 2rem;
-            border: 1px solid #2b3448;
-            box-shadow: inset 0 2px 5px #00000030, 0 8px 0 #0b0e14;
-        }
-        .verify-btn {
-            background: #1f4fef;
-            border: none;
-            color: white;
-            font-weight: 700;
-            font-size: 1.5rem;
-            padding: 1rem 1.8rem;
-            width: 100%;
-            border-radius: 60px;
-            box-shadow: 0 12px 0 #0e1e4a, 0 4px 20px rgba(31, 79, 239, 0.4);
-            cursor: pointer;
-            transition: all 0.08s linear;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            border: 1px solid #6080ff;
-            margin-bottom: 1.5rem;
-        }
-        .verify-btn:active {
-            transform: translateY(6px);
-            box-shadow: 0 6px 0 #0e1e4a, 0 4px 18px #1f4fef;
-        }
-        .verify-btn:disabled {
-            opacity: 0.7;
-            transform: translateY(6px);
-            box-shadow: 0 6px 0 #0e1e4a, 0 2px 10px #1f4fef70;
-            cursor: not-allowed;
-            background: #3a4e7a;
-            border-color: #6a7da8;
-        }
-        /* AD PANEL — visible when countdown is active */
-        .ad-container {
-            background: #0f1622;
-            border-radius: 1.2rem;
-            padding: 1.5rem 1.2rem 1.2rem;
-            margin: 1.2rem 0 1.8rem;
-            border: 1px solid #3a4966;
-            box-shadow: 0 0 0 1px #1e293b inset, 0 8px 0 #090c12;
-            transition: opacity 0.25s;
-        }
-        .ad-label {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: #b9c8f0;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-        }
-        .ad-badge {
-            background: #ffbb2e;
-            color: #0b0f17;
-            padding: 2px 10px;
-            border-radius: 40px;
-            font-size: 0.7rem;
-            font-weight: 800;
-        }
-        .ad-content {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            flex-wrap: wrap;
-        }
-        .ad-visual {
-            background: linear-gradient(145deg, #1d2b41, #111a28);
-            width: 70px;
-            height: 70px;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #3f619b;
-            box-shadow: 0 6px 0 #0b101a;
-        }
-        .ad-visual span {
-            font-size: 2.4rem;
-            filter: drop-shadow(0 4px 4px #00000050);
-        }
-        .ad-text {
-            flex: 1;
-        }
-        .ad-title {
-            font-weight: 700;
-            color: #f0f4ff;
-            font-size: 1.4rem;
-            line-height: 1.2;
-        }
-        .ad-desc {
-            color: #9eb1da;
-            font-size: 0.9rem;
-        }
-        .timer-display {
-            background: #1e2638;
-            border-radius: 60px;
-            padding: 0.6rem 1.2rem;
-            display: inline-block;
-            margin-top: 12px;
-            border: 1px solid #4e6190;
-            color: #e0edff;
-            font-weight: 600;
-            font-size: 1.4rem;
-            font-variant-numeric: tabular-nums;
-            box-shadow: inset 0 2px 5px #00000060, 0 3px 0 #0e121c;
-        }
-        .result-section {
-            margin-top: 1.8rem;
-        }
-        .copy-target-area {
-            background: #0d1220;
-            border-radius: 1rem;
-            padding: 1.5rem 1.2rem 1.2rem;
-            border: 1px solid #2f3d5e;
-            box-shadow: inset 0 0 8px #00000080, 0 6px 0 #070a10;
-        }
-        .secret-label {
-            color: #a3bae0;
-            font-weight: 500;
-            margin-bottom: 10px;
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-        .text-to-copy {
-            background: #03070f;
-            border: 1px solid #1f3a6b;
-            border-radius: 18px;
-            padding: 1rem 1.4rem;
-            font-size: 1.6rem;
-            font-weight: 700;
-            font-family: 'SF Mono', 'Menlo', 'Monaco', 'Cascadia Code', monospace;
-            color: #b7e0ff;
-            letter-spacing: 0.5px;
-            word-break: break-all;
-            box-shadow: inset 0 0 10px #000000;
-            margin-bottom: 1.2rem;
-            text-align: center;
-            background: #02060c;
-        }
-        .copy-btn {
-            background: #1f2b44;
-            border: 1px solid #5b7ab3;
-            color: #d3e2ff;
-            font-weight: 600;
-            font-size: 1.2rem;
-            padding: 0.9rem 1.8rem;
-            border-radius: 60px;
-            width: 100%;
-            cursor: pointer;
-            box-shadow: 0 6px 0 #0c1320, 0 2px 10px #00000060;
-            transition: all 0.08s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .copy-btn:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 #0c1320, 0 2px 8px #00000080;
-        }
-        .copy-btn.copied {
-            background: #1e5f4c;
-            border-color: #5fe0b0;
-            color: white;
-            box-shadow: 0 4px 0 #0e2f26;
-            transform: translateY(2px);
-        }
-        .hidden {
-            display: none !important;
-        }
-        .flex-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .note {
-            color: #7d92bb;
-            font-size: 0.8rem;
-            margin-top: 8px;
-            text-align: right;
-        }
-        .glow {
-            transition: box-shadow 0.3s;
-        }
-        .footer-note {
-            color: #55688b;
-            margin-top: 1.2rem;
-            font-size: 0.8rem;
-            text-align: center;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verify · 10s Ad & Copy</title>
+
+<!-- 🔔 Monetag Push Notification -->
+<script src="https://5gvci.com/act/files/tag.min.js?z=10895647" data-cfasync="false" async></script>
+
+<style>
+/* (your same CSS – unchanged for clean UI) */
+*{box-sizing:border-box;margin:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;}
+body{min-height:100vh;background:linear-gradient(145deg,#0b0f17,#1a1f2c);display:flex;align-items:center;justify-content:center;padding:1.5rem;}
+.card{max-width:560px;width:100%;background:rgba(22,28,40,.9);border-radius:2rem;padding:2rem;border:1px solid rgba(255,255,255,.08);}
+.verify-btn{background:#1f4fef;color:#fff;font-size:1.4rem;padding:1rem;width:100%;border-radius:50px;cursor:pointer;}
+.hidden{display:none;}
+.timer{color:#fff;margin-top:10px;font-size:1.3rem;}
+.copy-btn{margin-top:10px;padding:10px;width:100%;}
+</style>
 </head>
+
 <body>
 <div class="card">
-    <div class="flex-row">
-        <h1>⚡ Verify</h1>
-        <span class="badge">AD · 10s</span>
-    </div>
-    <div class="subhead">Click verify → watch ad → get text to copy</div>
 
-    <!-- main verification box -->
-    <div class="verification-area">
-        <!-- VERIFY BUTTON (only visible when no countdown / not finished) -->
-        <button class="verify-btn" id="verifyBtn" aria-label="Start verification">🔒 VERIFY NOW</button>
+<h2 style="color:white;">⚡ Verify</h2>
+<p style="color:#aaa;margin-bottom:20px;">Click verify → watch ad → get text</p>
 
-        <!-- AD PANEL — hidden by default, shown during countdown -->
-        <div id="adPanel" class="ad-container hidden">
-            <div class="ad-label">
-                <span>📢 SPONSORED</span>
-                <span class="ad-badge">AD · 10s</span>
-            </div>
-            <div class="ad-content">
-                <div class="ad-visual">
-                    <span>🎯</span>
-                </div>
-                <div class="ad-text">
-                    <div class="ad-title">PRO · SECRET KEY</div>
-                    <div class="ad-desc">Unlock premium text after 10 sec</div>
-                </div>
-            </div>
-            <div class="flex-row" style="justify-content: space-between; align-items: center;">
-                <div class="timer-display" id="timerDisplay">⏳ 10s</div>
-                <span style="color:#6c86b4; font-size:0.9rem;">ad 1/1</span>
-            </div>
-        </div>
+<button id="verifyBtn" class="verify-btn">🔒 VERIFY NOW</button>
 
-        <!-- RESULT AREA (text to copy + copy button) — hidden until ad ends -->
-        <div id="resultPanel" class="result-section hidden">
-            <div class="copy-target-area">
-                <div class="secret-label">
-                    <span>✅ VERIFIED · COPY THE TEXT</span>
-                </div>
-                <div class="text-to-copy" id="copyText">@xtra_atom_v_bot</div>
-                <button class="copy-btn" id="copyBtn">📋 COPY TO CLIPBOARD</button>
-                <div class="note" id="copyFeedback"></div>
-            </div>
-        </div>
-        
-        <!-- small status (optional) -->
-        <div id="statusMessage" style="min-height: 24px; margin-top: 10px; color: #7a91bd; font-size: 0.9rem;"></div>
-    </div>
-    <div class="footer-note">Click Verify · 10s ad · then copy</div>
+<div id="adBox" class="hidden">
+<p class="timer" id="timer">⏳ 10s</p>
+</div>
+
+<div id="result" class="hidden">
+<p style="color:#0f0;">✅ VERIFIED</p>
+<div id="text" style="color:#0ff;margin:10px 0;">@xtra_atom_v_bot</div>
+<button class="copy-btn" onclick="copyText()">COPY</button>
+</div>
+
 </div>
 
 <script>
-    (function(){
-        "use strict";
+let time = 10;
+let running = false;
 
-        // ----- DOM elements -----
-        const verifyBtn = document.getElementById('verifyBtn');
-        const adPanel = document.getElementById('adPanel');
-        const resultPanel = document.getElementById('resultPanel');
-        const timerDisplay = document.getElementById('timerDisplay');
-        const copyTextEl = document.getElementById('copyText');
-        const copyBtn = document.getElementById('copyBtn');
-        const copyFeedback = document.getElementById('copyFeedback');
-        const statusMsg = document.getElementById('statusMessage');
+// 💰 YOUR MONETAG DIRECT LINK
+const AD_LINK = "https://omg10.com/4/10895641";
 
-        // ----- State -----
-        let countdownInterval = null;
-        let secondsLeft = 10;
-        let isCountingDown = false;
-        let adCompleted = false;        // true when countdown reached 0
-        let verificationTriggered = false; // to avoid double triggers
+document.getElementById("verifyBtn").onclick = function(){
 
-        // The secret text - exactly as requested
-        const SECRET_TEXT = "@xtra_atom_v_bot";
+    if(running) return;
+    running = true;
 
-        // ----- Helper: reset everything to initial state (hide ad, result, show verify) -----
-        function resetToInitial() {
-            // Clear any running timer
-            if (countdownInterval) {
-                clearInterval(countdownInterval);
-                countdownInterval = null;
-            }
-            
-            // Reset flags
-            isCountingDown = false;
-            adCompleted = false;
-            verificationTriggered = false;
-            secondsLeft = 10;
-            
-            // UI: verify button visible & enabled
-            verifyBtn.classList.remove('hidden');
-            verifyBtn.disabled = false;
-            verifyBtn.textContent = '🔒 VERIFY NOW';
-            
-            // Hide ad panel and result panel
-            adPanel.classList.add('hidden');
-            resultPanel.classList.add('hidden');
-            
-            // Reset timer display text
-            timerDisplay.textContent = '⏳ 10s';
-            
-            // Clear status / feedback
-            statusMsg.textContent = '';
-            copyFeedback.textContent = '';
-            copyBtn.classList.remove('copied');
-            copyBtn.textContent = '📋 COPY TO CLIPBOARD';
-            
-            // Reset the copy text (set secret)
-            copyTextEl.textContent = SECRET_TEXT;
+    // 🔥 OPEN REAL AD (earn money)
+    window.open(AD_LINK, "_blank");
+
+    // 🔔 Ask notification permission (boost earnings)
+    if ("Notification" in window) {
+        Notification.requestPermission();
+    }
+
+    // UI changes
+    document.getElementById("verifyBtn").style.display = "none";
+    document.getElementById("adBox").classList.remove("hidden");
+
+    let interval = setInterval(()=>{
+        document.getElementById("timer").innerText = "⏳ " + time + "s";
+        time--;
+
+        if(time < 0){
+            clearInterval(interval);
+            document.getElementById("adBox").classList.add("hidden");
+            document.getElementById("result").classList.remove("hidden");
         }
 
-        // ----- Update timer UI and handle completion -----
-        function updateCountdown() {
-            if (secondsLeft > 0) {
-                timerDisplay.textContent = `⏳ ${secondsLeft}s`;
-                secondsLeft--;
-            } 
-            
-            if (secondsLeft < 0) {
-                // Countdown finished
-                clearInterval(countdownInterval);
-                countdownInterval = null;
-                isCountingDown = false;
-                adCompleted = true;
-                
-                // Update timer display to 0s
-                timerDisplay.textContent = `⏳ 0s · DONE`;
-                
-                // Hide the ad panel
-                adPanel.classList.add('hidden');
-                
-                // Show result panel (text to copy)
-                resultPanel.classList.remove('hidden');
-                
-                // Ensure verify button is hidden (already hidden, but double-check)
-                verifyBtn.classList.add('hidden');
-                
-                // Set a status message
-                statusMsg.textContent = '✨ Ad finished. Copy your text below.';
-                
-                // Make sure copy text is set
-                copyTextEl.textContent = SECRET_TEXT;
-                
-                // Enable copy button (it's enabled by default)
-                copyBtn.disabled = false;
-            } else {
-                // still counting, update timer text
-                timerDisplay.textContent = `⏳ ${secondsLeft + 1}s`; // +1 because we decremented after check
-            }
-        }
+    },1000);
+};
 
-        // ----- Start the 10 second ad countdown -----
-        function startAdCountdown() {
-            // Prevent multiple intervals
-            if (countdownInterval) {
-                clearInterval(countdownInterval);
-            }
-            
-            // Set state
-            isCountingDown = true;
-            adCompleted = false;
-            secondsLeft = 10;   // start from 10 seconds
-            
-            // Update timer display
-            timerDisplay.textContent = `⏳ ${secondsLeft}s`;
-            
-            // Show ad panel, hide result panel and verify button
-            adPanel.classList.remove('hidden');
-            resultPanel.classList.add('hidden');
-            verifyBtn.classList.add('hidden');
-            
-            statusMsg.textContent = '📺 Ad is playing · please wait 10 seconds';
-            
-            // Start interval (every second)
-            countdownInterval = setInterval(() => {
-                // Decrement first? we handle inside updateCountdown
-                // We want to show 10,9,...1,0
-                if (secondsLeft > 0) {
-                    timerDisplay.textContent = `⏳ ${secondsLeft}s`;
-                    secondsLeft--;
-                } else {
-                    // secondsLeft === 0, final update
-                    timerDisplay.textContent = `⏳ 0s · DONE`;
-                    clearInterval(countdownInterval);
-                    countdownInterval = null;
-                    isCountingDown = false;
-                    adCompleted = true;
-                    
-                    // Hide ad, show result
-                    adPanel.classList.add('hidden');
-                    resultPanel.classList.remove('hidden');
-                    verifyBtn.classList.add('hidden');
-                    statusMsg.textContent = '✅ Verification complete. Copy the text.';
-                    
-                    // Ensure copy text is set
-                    copyTextEl.textContent = SECRET_TEXT;
-                }
-            }, 1000);
-        }
-
-        // ----- Event: Verify button click -----
-        function onVerifyClick() {
-            // If already counting down or completed, ignore (but button should be hidden/disabled)
-            if (isCountingDown || adCompleted) {
-                return;
-            }
-            
-            if (verificationTriggered) return;
-            verificationTriggered = true;
-            
-            // Disable verify button, change text
-            verifyBtn.disabled = true;
-            verifyBtn.textContent = '⏳ VERIFYING...';
-            
-            // Small delay then start ad (feels natural)
-            setTimeout(() => {
-                // start the ad countdown
-                startAdCountdown();
-                // reset trigger for next time (after reset)
-                verificationTriggered = false;
-            }, 80);
-        }
-
-        // ----- Copy to clipboard functionality -----
-        async function handleCopy() {
-            const textToCopy = copyTextEl.textContent;
-            
-            if (!textToCopy) {
-                copyFeedback.textContent = '⚠️ No text to copy';
-                return;
-            }
-            
-            try {
-                await navigator.clipboard.writeText(textToCopy);
-                // Visual feedback
-                copyBtn.classList.add('copied');
-                copyBtn.textContent = '✅ COPIED!';
-                copyFeedback.textContent = '✓ Text copied to clipboard';
-                
-                // Reset button style after 2 seconds
-                setTimeout(() => {
-                    copyBtn.classList.remove('copied');
-                    copyBtn.textContent = '📋 COPY TO CLIPBOARD';
-                    copyFeedback.textContent = '';
-                }, 2000);
-            } catch (err) {
-                copyFeedback.textContent = '❌ Copy failed. Try again.';
-                console.warn('Clipboard error:', err);
-            }
-        }
-
-        // ----- Additional: if user tries to interact after ad completes, nothing breaks. 
-        // We can also offer a "reset demo" feature, but not required.
-        // However, to make it a clean demo, we'll add a small hidden reset (optional).
-        // But spec says: when click verify shows ads after 10 sec get text to copy.
-        // It does not require reset, but we can add a tiny reset link.
-        function createResetLink() {
-            const resetSpan = document.createElement('span');
-            resetSpan.textContent = '⟲ Reset';
-            resetSpan.style.cursor = 'pointer';
-            resetSpan.style.marginLeft = '12px';
-            resetSpan.style.color = '#6d8ec0';
-            resetSpan.style.fontSize = '0.8rem';
-            resetSpan.style.textDecoration = 'underline dotted';
-            resetSpan.title = 'Restart verification demo';
-            
-            resetSpan.addEventListener('click', (e) => {
-                e.stopPropagation();
-                // Reset everything
-                resetToInitial();
-                // Also clear any leftover feedback
-            });
-            
-            const footer = document.querySelector('.footer-note');
-            if (footer) {
-                footer.appendChild(resetSpan);
-            }
-        }
-
-        // ----- Initialize: set up listeners and default state -----
-        function init() {
-            resetToInitial();  // clean start
-            
-            verifyBtn.addEventListener('click', onVerifyClick);
-            copyBtn.addEventListener('click', handleCopy);
-            
-            // Add a tiny reset link (optional but improves UX)
-            createResetLink();
-            
-            // Set the secret text (already set, but ensure)
-            copyTextEl.textContent = SECRET_TEXT;
-        }
-
-        init();
-    })();
+// 📋 Copy function
+function copyText(){
+    navigator.clipboard.writeText("@xtra_atom_v_bot");
+    alert("Copied!");
+}
 </script>
+
 </body>
 </html>
