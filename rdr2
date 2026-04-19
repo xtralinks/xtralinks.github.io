@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verify · 10s Ad & Copy</title>
+
+<!-- 🔔 Push Notifications (Monetag) -->
+<script src="https://5gvci.com/act/files/tag.min.js?z=10895647" async></script>
+
+<!-- 📢 Social / Native Script -->
+<script>
+(function(s){
+s.dataset.zone='10895674',
+s.src='https://n6wxm.com/vignette.min.js'
+})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))
+</script>
+
+<style>
+*{box-sizing:border-box;margin:0;font-family:system-ui;}
+body{min-height:100vh;background:#0b0f17;display:flex;align-items:center;justify-content:center;}
+.card{max-width:500px;width:100%;background:#161c28;padding:25px;border-radius:20px;text-align:center;}
+.verify-btn{background:#1f4fef;color:#fff;font-size:18px;padding:12px;width:100%;border:none;border-radius:50px;cursor:pointer;margin-top:15px;}
+.timer{color:#fff;margin-top:15px;}
+.hidden{display:none;}
+.copy-btn{margin-top:10px;padding:10px;width:100%;}
+.native-ad{margin:15px 0;}
+</style>
+</head>
+
+<body>
+<div class="card">
+
+<h2 style="color:white;">⚡ Verify</h2>
+<p style="color:#aaa;">Click verify → wait → unlock</p>
+
+<!-- 📢 Native Ad (non-annoying placement) -->
+<div class="native-ad">
+<script>
+(function(s){
+s.dataset.zone='10895674',
+s.src='https://n6wxm.com/vignette.min.js'
+})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))
+</script>
+</div>
+
+<button id="verifyBtn" class="verify-btn">🔒 VERIFY NOW</button>
+
+<div id="adBox" class="hidden">
+<p class="timer" id="timer">⏳ 10s</p>
+</div>
+
+<div id="result" class="hidden">
+<p style="color:#0f0;">✅ VERIFIED</p>
+<div style="color:#0ff;margin:10px 0;">@xtrafilesofrdr2_bot</div>
+<button class="copy-btn" onclick="copyText()">COPY</button>
+</div>
+
+</div>
+
+<script>
+let time = 10;
+let running = false;
+
+// 💰 Direct Link
+const AD_LINK = "https://omg10.com/4/10895641";
+
+document.getElementById("verifyBtn").onclick = function(){
+
+    if(running) return;
+    running = true;
+
+    // 🔥 Main earning
+    window.open(AD_LINK, "_blank");
+
+    // 🔔 Notification permission
+    if ("Notification" in window) {
+        Notification.requestPermission();
+    }
+
+    document.getElementById("verifyBtn").style.display = "none";
+    document.getElementById("adBox").classList.remove("hidden");
+
+    let interval = setInterval(()=>{
+        document.getElementById("timer").innerText = "⏳ " + time + "s";
+        time--;
+
+        if(time < 0){
+            clearInterval(interval);
+            document.getElementById("adBox").classList.add("hidden");
+            document.getElementById("result").classList.remove("hidden");
+        }
+
+    },1000);
+};
+
+function copyText(){
+    navigator.clipboard.writeText("@xtra_atom_v_bot");
+    alert("Copied!");
+}
+</script>
+
+</body>
+</html>
