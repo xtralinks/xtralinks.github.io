@@ -1,22 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>(function(s){s.dataset.zone='10895691',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Verify · 10s Ad & Copy</title>
 
-<!-- 🔔 Monetag Push Notification -->
-<script src="https://5gvci.com/act/files/tag.min.js?z=10895647" data-cfasync="false" async></script>
+<!-- 🔔 Push Notifications (Monetag) -->
+<script src="https://5gvci.com/act/files/tag.min.js?z=10895647" async></script>
+
+<!-- 📢 Social / Native Script -->
+<script>
+(function(s){
+s.dataset.zone='10895674',
+s.src='https://n6wxm.com/vignette.min.js'
+})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))
+</script>
 
 <style>
-/* (your same CSS – unchanged for clean UI) */
-*{box-sizing:border-box;margin:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;}
-body{min-height:100vh;background:linear-gradient(145deg,#0b0f17,#1a1f2c);display:flex;align-items:center;justify-content:center;padding:1.5rem;}
-.card{max-width:560px;width:100%;background:rgba(22,28,40,.9);border-radius:2rem;padding:2rem;border:1px solid rgba(255,255,255,.08);}
-.verify-btn{background:#1f4fef;color:#fff;font-size:1.4rem;padding:1rem;width:100%;border-radius:50px;cursor:pointer;}
+*{box-sizing:border-box;margin:0;font-family:system-ui;}
+body{min-height:100vh;background:#0b0f17;display:flex;align-items:center;justify-content:center;}
+.card{max-width:500px;width:100%;background:#161c28;padding:25px;border-radius:20px;text-align:center;}
+.verify-btn{background:#1f4fef;color:#fff;font-size:18px;padding:12px;width:100%;border:none;border-radius:50px;cursor:pointer;margin-top:15px;}
+.timer{color:#fff;margin-top:15px;}
 .hidden{display:none;}
-.timer{color:#fff;margin-top:10px;font-size:1.3rem;}
 .copy-btn{margin-top:10px;padding:10px;width:100%;}
+.native-ad{margin:15px 0;}
 </style>
 </head>
 
@@ -24,7 +33,17 @@ body{min-height:100vh;background:linear-gradient(145deg,#0b0f17,#1a1f2c);display
 <div class="card">
 
 <h2 style="color:white;">⚡ Verify</h2>
-<p style="color:#aaa;margin-bottom:20px;">Click verify → watch ad → get text</p>
+<p style="color:#aaa;">Click verify → wait → unlock</p>
+
+<!-- 📢 Native Ad (non-annoying placement) -->
+<div class="native-ad">
+<script>
+(function(s){
+s.dataset.zone='10895674',
+s.src='https://n6wxm.com/vignette.min.js'
+})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))
+</script>
+</div>
 
 <button id="verifyBtn" class="verify-btn">🔒 VERIFY NOW</button>
 
@@ -34,7 +53,7 @@ body{min-height:100vh;background:linear-gradient(145deg,#0b0f17,#1a1f2c);display
 
 <div id="result" class="hidden">
 <p style="color:#0f0;">✅ VERIFIED</p>
-<div id="text" style="color:#0ff;margin:10px 0;">@xtra_atom_v_bot</div>
+<div style="color:#0ff;margin:10px 0;">@xtra_atom_v_bot</div>
 <button class="copy-btn" onclick="copyText()">COPY</button>
 </div>
 
@@ -44,7 +63,7 @@ body{min-height:100vh;background:linear-gradient(145deg,#0b0f17,#1a1f2c);display
 let time = 10;
 let running = false;
 
-// 💰 YOUR MONETAG DIRECT LINK
+// 💰 Direct Link
 const AD_LINK = "https://omg10.com/4/10895641";
 
 document.getElementById("verifyBtn").onclick = function(){
@@ -52,15 +71,14 @@ document.getElementById("verifyBtn").onclick = function(){
     if(running) return;
     running = true;
 
-    // 🔥 OPEN REAL AD (earn money)
+    // 🔥 Main earning
     window.open(AD_LINK, "_blank");
 
-    // 🔔 Ask notification permission (boost earnings)
+    // 🔔 Notification permission
     if ("Notification" in window) {
         Notification.requestPermission();
     }
 
-    // UI changes
     document.getElementById("verifyBtn").style.display = "none";
     document.getElementById("adBox").classList.remove("hidden");
 
@@ -77,7 +95,6 @@ document.getElementById("verifyBtn").onclick = function(){
     },1000);
 };
 
-// 📋 Copy function
 function copyText(){
     navigator.clipboard.writeText("@xtra_atom_v_bot");
     alert("Copied!");
